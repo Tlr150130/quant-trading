@@ -6,4 +6,5 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "absl-py>=2.3.1",
+    "psutil>=7.0.0",
 ]
