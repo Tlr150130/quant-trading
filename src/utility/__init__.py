@@ -9,7 +9,7 @@ import gc
 
 def add_diagnostics():
     """
-    Decorator to report execution time, memory usage, CPU usage, I/O, call count, GC events, and exceptions.
+    Decorator to report execution time, memory usage, CPU usage, I/O, call count, GC events, exceptions, and result type.
     """
     def decorator(func):
         call_count = 0
@@ -49,18 +49,19 @@ def add_diagnostics():
             tracemalloc.stop()
 
             # Report metrics
-            print(f"Diagnostics for '{func_name}':")
-            print(f" - Path: '{path}'")
-            print(f" - Call count: {call_count}")
-            print(f" - Processing time: {end_time - start_time:.6f} seconds")
-            print(f" - Memory usage: current={current / 1024:.2f} KB, peak={peak / 1024:.2f} KB")
-            print(f" - CPU (user/system) time: {end_cpu.user - start_cpu.user:.6f}s / {end_cpu.system - start_cpu.system:.6f}s")
-            print(f" - I/O (read/write): {end_io.read_bytes - start_io.read_bytes} / {end_io.write_bytes - start_io.write_bytes} bytes")
+            print(f"Diagnostics for               '{func_name}':")
+            print(f" - Path:                      '{path}'")
+            print(f" - Call count:                {call_count}")
+            print(f" - Processing time:           {end_time - start_time:.6f} seconds")
+            print(f" - Memory usage:              current={current / 1024:.2f} KB, peak={peak / 1024:.2f} KB")
+            print(f" - CPU (user/system) time:    {end_cpu.user - start_cpu.user:.6f}s / {end_cpu.system - start_cpu.system:.6f}s")
+            print(f" - I/O (read/write):          {end_io.read_bytes - start_io.read_bytes} / {end_io.write_bytes - start_io.write_bytes} bytes")
             print(f" - Garbage Collection events: {tuple(e - s for s, e in zip(gc_start, gc_end))}")
+            print(f" - Result type:               {type(result).__name__}")
             
             # Report and raise error if needed
             if exception_raised:
-                print(f" - Exception raised: {exception_raised}")
+                print(f" - Exception raised:          {exception_raised}")
                 raise exception_raised
 
             # Return result
