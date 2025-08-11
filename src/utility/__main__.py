@@ -12,7 +12,7 @@ def test_function():
 
 def main(argv):
     del argv  # Unused.
-    print("Hello from data loader!")
+    print("Hello from Utility Module!")
     test_function()
 
 if __name__ == '__main__':

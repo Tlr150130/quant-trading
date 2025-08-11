@@ -1,7 +1,7 @@
 from absl import app
 from absl import flags
 
-from src.utility import PROJECT_DIR
+from src.config import PROJECT_DIR
 
 FLAGS = flags.FLAGS
 
